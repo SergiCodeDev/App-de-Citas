@@ -4,6 +4,8 @@ import Link from "next/link";
 import { IconLock, IconMail, IconUser } from "../icon/IconsGroup";
 import { useId } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 
 export default function FormLoginAndRegister({ type }) {
 
@@ -26,8 +28,26 @@ export default function FormLoginAndRegister({ type }) {
         }
     };
 
+    const router = useRouter()
+
     const onSubmitLogic = async (data) => {
-        console.log(data)
+        if (type === "register") {
+            const res = await fetch("/api/auth/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (res.ok) {
+                router.push("/login");
+            } else {
+                const errorData = await res.json();
+                toast.error(errorData.error || "Algo salió mal");
+            }
+        }
+
     }
 
     return (
@@ -95,51 +115,51 @@ export default function FormLoginAndRegister({ type }) {
                                     required: "Se requiere contraseña.",
                                     validate: (value) => {
                                         const requirements = {
-                                          length: {
-                                            test: (v) => v.length >= 8,
-                                            message: 'al menos 8 caracteres',
-                                          },
-                                          lowercase: {
-                                            test: (v) => /[a-z]/.test(v),
-                                            message: 'una letra minúscula',
-                                          },
-                                          uppercase: {
-                                            test: (v) => /[A-Z]/.test(v),
-                                            message: 'una letra mayúscula',
-                                          },
-                                          number: {
-                                            test: (v) => /[0-9]/.test(v),
-                                            message: 'un numero',
-                                          },
-                                          specialChar: {
-                                            test: (v) => /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(v),
-                                            message: 'un carácter especial',
-                                          },
+                                            length: {
+                                                test: (v) => v.length >= 8,
+                                                message: 'al menos 8 caracteres',
+                                            },
+                                            lowercase: {
+                                                test: (v) => /[a-z]/.test(v),
+                                                message: 'una letra minúscula',
+                                            },
+                                            uppercase: {
+                                                test: (v) => /[A-Z]/.test(v),
+                                                message: 'una letra mayúscula',
+                                            },
+                                            number: {
+                                                test: (v) => /[0-9]/.test(v),
+                                                message: 'un numero',
+                                            },
+                                            specialChar: {
+                                                test: (v) => /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(v),
+                                                message: 'un carácter especial',
+                                            },
                                         };
-                                    
+
                                         const unmetRequirements = Object.values(requirements)
-                                          .filter((requirement) => !requirement.test(value))
-                                          .map((requirement) => requirement.message);
-                                    
+                                            .filter((requirement) => !requirement.test(value))
+                                            .map((requirement) => requirement.message);
+
                                         if (unmetRequirements.length === 0) {
-                                          return true;
+                                            return true;
                                         }
-                                    
+
                                         let errorMessage = 'La contraseña debe tener ';
                                         if (unmetRequirements.length === 1) {
-                                          errorMessage += unmetRequirements[0] + '.';
+                                            errorMessage += unmetRequirements[0] + '.';
                                         } else if (unmetRequirements.length === 2) {
-                                          errorMessage += unmetRequirements.join(' y ') + '.';
+                                            errorMessage += unmetRequirements.join(' y ') + '.';
                                         } else {
-                                          errorMessage +=
-                                            unmetRequirements.slice(0, -1).join(', ') +
-                                            ' y ' +
-                                            unmetRequirements[unmetRequirements.length - 1] +
-                                            '.';
+                                            errorMessage +=
+                                                unmetRequirements.slice(0, -1).join(', ') +
+                                                ' y ' +
+                                                unmetRequirements[unmetRequirements.length - 1] +
+                                                '.';
                                         }
-                                    
+
                                         return errorMessage;
-                                      }
+                                    }
                                 })}
                                 type="password"
                                 name="contra"
