@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { IconLock, IconMail, IconUser } from "../icon/IconsGroup";
-import { useId, useRef } from "react";
+import { useId } from "react";
 import { useForm } from "react-hook-form";
 
 export default function FormLoginAndRegister({ type }) {
@@ -32,12 +32,12 @@ export default function FormLoginAndRegister({ type }) {
 
     return (
         <main className="w-full h-lvh flex items-center justify-center">
-            <div className="w-1/3 py-7 px-4 max-sm:w-5/6 max-lg:w-2/3 max-xl:w-1/2 flex flex-col items-center justify-center gap-6 bg-white rounded-3xl">
+            <div className="w-1/3 py-7 px-4 max-sm:w-5/6 max-lg:w-2/3 max-xl:w-1/2 flex flex-col items-center justify-center gap-6 bg-white rounded-3xl shadow-2xl shadow-pink-400/60">
                 <img src="/next.svg" alt="logo" className="w-52 h-auto" />
                 <form noValidate className="flex flex-col items-center gap-5" onSubmit={handleSubmit(onSubmitLogic)}>
                     {type === "register" && (
                         <div className="max-sm:w-72 w-96">
-                            <div onClick={() => handleFocusImput(usuarioForm)} className="flex items-center justify-between px-5 py-3 rounded-2xl shadow-2xl transition-all duration-200 ease-in-out hover:scale-110 hover:bg-white cursor-text focus-within:scale-110 focus-within:bg-white">
+                            <div onClick={() => handleFocusImput(usuarioForm)} className="flex items-center justify-between px-5 py-3 rounded-2xl shadow-2xl transition-all duration-200 ease-in-out hover:scale-110 hover:bg-white cursor-text focus-within:scale-110 focus-within:bg-white shadow-pink-400/60">
                                 <input
                                     defaultValue=""
                                     {...register("usuario", {
@@ -65,7 +65,7 @@ export default function FormLoginAndRegister({ type }) {
                         </div>
                     )}
                     <div className="max-sm:w-72 w-96">
-                        <div onClick={() => handleFocusImput(correoForm)} className="flex items-center justify-between px-5 py-3 rounded-2xl shadow-2xl transition-all duration-200 ease-in-out hover:scale-110 hover:bg-white cursor-text focus-within:scale-110 focus-within:bg-white">
+                        <div onClick={() => handleFocusImput(correoForm)} className="flex items-center justify-between px-5 py-3 rounded-2xl shadow-2xl transition-all duration-200 ease-in-out hover:scale-110 hover:bg-white cursor-text focus-within:scale-110 focus-within:bg-white shadow-pink-400/60">
                             <input
                                 defaultValue=""
                                 {...register("correo", {
@@ -88,7 +88,7 @@ export default function FormLoginAndRegister({ type }) {
                         )}
                     </div>
                     <div className="max-sm:w-72 w-96">
-                        <div onClick={() => handleFocusImput(contraForm)} className="flex items-center justify-between px-5 py-3 rounded-2xl shadow-2xl transition-all duration-200 ease-in-out hover:scale-110 hover:bg-white cursor-text focus-within:scale-110 focus-within:bg-white">
+                        <div onClick={() => handleFocusImput(contraForm)} className="flex items-center justify-between px-5 py-3 rounded-2xl shadow-2xl transition-all duration-200 ease-in-out hover:scale-110 hover:bg-white cursor-text focus-within:scale-110 focus-within:bg-white shadow-pink-400/60">
                             <input
                                 defaultValue=""
                                 {...register("contra", {
@@ -156,7 +156,7 @@ export default function FormLoginAndRegister({ type }) {
 
                     {type === "register" && (
                         <div className="max-sm:w-72 w-96">
-                            <div onClick={() => handleFocusImput(confirmarContraForm)} className="flex items-center justify-between px-5 py-3 rounded-2xl shadow-2xl transition-all duration-200 ease-in-out hover:scale-110 hover:bg-white cursor-text focus-within:scale-110 focus-within:bg-white">
+                            <div onClick={() => handleFocusImput(confirmarContraForm)} className="flex items-center justify-between px-5 py-3 rounded-2xl shadow-2xl transition-all duration-200 ease-in-out hover:scale-110 hover:bg-white cursor-text focus-within:scale-110 focus-within:bg-white shadow-pink-400/60">
                                 <input
                                     defaultValue=""
                                     {...register("confirmarContra", {
