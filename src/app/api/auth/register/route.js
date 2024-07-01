@@ -10,9 +10,9 @@ export const POST = async (req) => {
 
         const body = await req.json();
 
-        const { username, email, password } = body;
+        const { usuario, correo, contra } = body;
 
-        const existingUser = await User.findOne({ email });
+        const existingUser = await User.findOne({ email: correo });
 
         if (existingUser) {
             return new Response(JSON.stringify({ error: "El usuario ya existe" }), {
@@ -21,11 +21,11 @@ export const POST = async (req) => {
             });
         }
 
-        const hashedPassword = await hash(password, process.env.SALT_ROUNDS);
+        const hashedPassword = await hash(contra, parseInt(process.env.SALT_ROUNDS));
 
         const newUser = await User.create({
-            username,
-            email,
+            username: usuario,
+            email: correo,
             password: hashedPassword,
         });
 

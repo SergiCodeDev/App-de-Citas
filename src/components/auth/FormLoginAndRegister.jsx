@@ -4,8 +4,8 @@ import Link from "next/link";
 import { IconLock, IconMail, IconUser } from "../icon/IconsGroup";
 import { useId } from "react";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/router";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function FormLoginAndRegister({ type }) {
 
@@ -31,6 +31,7 @@ export default function FormLoginAndRegister({ type }) {
     const router = useRouter()
 
     const onSubmitLogic = async (data) => {
+        
         if (type === "register") {
             const res = await fetch("/api/auth/register", {
                 method: "POST",
