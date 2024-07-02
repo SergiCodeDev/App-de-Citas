@@ -46,7 +46,11 @@ export default function FormLoginAndRegister({ type }) {
                 router.push("/login");
             } else {
                 const errorData = await res.json();
-                toast.error(errorData.error || "Algo salió mal");
+                toast.error(errorData.error || "Algo salió mal",{
+                    style: {
+                        boxShadow: "0 4px 10px rgb(244 114 182 / 0.4)"
+                    }
+                });
             }
         }
 
@@ -61,7 +65,12 @@ export default function FormLoginAndRegister({ type }) {
             }
 
             if (res.error) {
-                toast.error("Correo o contraseña incorrectos");
+                toast.error("Correo o contraseña incorrectos",{
+                    style: {
+                        boxShadow: "0 4px 10px rgb(244 114 182 / 0.4)"
+                    }
+                }
+                );
             }
         }
 
