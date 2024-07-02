@@ -6,6 +6,7 @@ import { useId } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react"
 
 export default function FormLoginAndRegister({ type }) {
 
@@ -31,7 +32,7 @@ export default function FormLoginAndRegister({ type }) {
     const router = useRouter()
 
     const onSubmitLogic = async (data) => {
-        
+
         if (type === "register") {
             const res = await fetch("/api/auth/register", {
                 method: "POST",
@@ -46,6 +47,21 @@ export default function FormLoginAndRegister({ type }) {
             } else {
                 const errorData = await res.json();
                 toast.error(errorData.error || "Algo salió mal");
+            }
+        }
+
+        if (type === "login") {
+            const res = await signIn("credentials", {
+                ...data,
+                redirect: false,
+            })
+
+            if (res.ok) {
+                router.push("/");
+            }
+
+            if (res.error) {
+                toast.error("Correo o contraseña incorrectos");
             }
         }
 
