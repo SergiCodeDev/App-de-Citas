@@ -10,6 +10,7 @@ export function NavBarLinks() {
     const links = [
         { nombre: 'Inicio', url: '/' },
         { nombre: 'Chat', url: '/chat' },
+        { nombre: 'Contacto', url: '/contacto' },
         { nombre: 'Perfil', url: '/perfil' },
     ];
 

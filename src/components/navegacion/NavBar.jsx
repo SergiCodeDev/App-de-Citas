@@ -2,6 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { NavBarLinks } from "./NavBarLinks";
+import Link from "next/link";
+import { IconLogout } from "../icon/IconsGroup";
+import { signOut, useSession } from "next-auth/react";
 
 export function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,6 +12,13 @@ export function NavBar() {
   const handleOpenModal = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const handleLogout = async () => {
+    signOut({callbackUrl: "/"})
+  }
+
+  const {data: session } = useSession()
+  const user = session?.user
 
   useEffect(() => {
     const body = document.body;
@@ -26,12 +36,21 @@ export function NavBar() {
   return (
     <header className="bg-pink-400 shadow-2xl shadow-pink-400/70 text-white p-4 sticky top-0 z-30">
       <div className="container mx-auto flex justify-between items-center">
-        <img src="/next.svg" alt="Logo" className="h-7" />
+        <Link href="/"><img src="/next.svg" alt="Logo" className="h-7" /></Link>
         <nav className="hidden md:flex">
           <ul className="flex space-x-4">
             <NavBarLinks />
           </ul>
         </nav>
+
+        <div className="hidden md:flex gap-x-2" onClick={handleLogout}>
+          <p>Cerrar sesión</p>
+          <IconLogout className="h-5 translate-y-[0.17rem]" />
+        </div>
+        <Link href="/perfil">
+        <img src={user?.profileImage || "/assets/default-user.jpg"} alt="Imagen de perfil" />
+        </Link>
+        
 
         <button className="md:hidden scale-150" onClick={handleOpenModal}>
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
