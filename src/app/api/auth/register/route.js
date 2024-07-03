@@ -4,6 +4,7 @@ import { connectToDB } from "@/mongodb";
 // import { hash } from "bcryptjs"; // compatibilidad 
 import { hash } from "bcrypt"; // +rapidez -compatibilidad
 
+// validar datos del formulario en el backend (no olvidarse)
 export const POST = async (req) => {
     try {
         await connectToDB();
