@@ -14,10 +14,10 @@ export function NavBar() {
   };
 
   const handleLogout = async () => {
-    signOut({callbackUrl: "/"})
+    signOut({ callbackUrl: "/" })
   }
 
-  const {data: session } = useSession()
+  const { data: session } = useSession()
   const user = session?.user
 
   useEffect(() => {
@@ -43,14 +43,17 @@ export function NavBar() {
           </ul>
         </nav>
 
-        <div className="hidden md:flex gap-x-2" onClick={handleLogout}>
+        <div className="hidden md:flex gap-x-2 cursor-pointer" onClick={handleLogout}>
           <p>Cerrar sesión</p>
           <IconLogout className="h-5 translate-y-[0.17rem]" />
         </div>
         <Link href="/perfil">
-        <img src={user?.profileImage || "/assets/default-user.jpg"} alt="Imagen de perfil" />
+          <img src={user?.profileImage || "/assets/default-user.jpg"}
+          alt="Imagen de perfil"
+          className="w-7 h-7 scale-[1.4] rounded-full object-cover object-center"
+          />
         </Link>
-        
+
 
         <button className="md:hidden scale-150" onClick={handleOpenModal}>
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
