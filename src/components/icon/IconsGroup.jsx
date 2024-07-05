@@ -3,7 +3,7 @@ export const IconUser = ({ className }) => {
         <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
-            viewBox="0 0 24 24"
+            viewBox="2 2 20 20"
             className={className}
         >
             <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
@@ -44,7 +44,7 @@ export const IconLogout = ({ className }) => {
             viewBox="0 0 24 24"
             className={className}
         >
-            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2">
+            <g fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="2">
                 <path d="M12 4H5C4.44772 4 4 4.44772 4 5V19C4 19.5523 4.44772 20 5 20H12" />
                 <path d="M9 12h11.5" />
                 <path d="M20.5 12l-3.5 -3.5M20.5 12l-3.5 3.5" />
@@ -53,3 +53,45 @@ export const IconLogout = ({ className }) => {
 
     )
 }
+
+export const IconCity = ({ className }) => {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            className={className}
+        >
+            <path
+                fillRule="evenodd"
+                d="M1 8v8h3V8H1zm2 7H1.979v-2.021H3V15zm.021-3H1.98V9.979h1.041V12zM10 5V3H9V0H8v3H7v2H5v11h7V5h-2zM7 15H6v-2h1v2zm0-2.958H6V10h1v2.042zm0-3H6V7h1v2.042zM9 15H8v-2h1v2zm0-2.958H8V10h1v2.042zm0-3H8V7h1v2.042zM11 15h-1v-2h1v2zm0-2.958h-1V10h1v2.042zm0-3h-1V7h1v2.042zM13 7v9h4v-5l-4-4zm2.031 8.062H14v-1.094h1.031v1.094zm0-2H14v-1.094h1.031v1.094zm0-2H14V9.968h1.031v1.094z" />
+        </svg>
+    )
+}
+
+export const IconDescription = ({ className }) => {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className={className}
+        >
+            <path
+                d="M8 18h8v-2H8v2Zm0-4h8v-2H8v2Zm-2 8q-.825 0-1.413-.588T4 20V4q0-.825.588-1.413T6 2h8l6 6v12q0 .825-.588 1.413T18 22H6Zm7-13h5l-5-5v5Z" />
+        </svg>
+    )
+}
+
+export const IconCalendar = ({ className }) => {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg"
+            viewBox="-1 0 22 22"
+            fill="currentColor"
+            className={className}
+        >
+            <path d="M1 4c0-1.1.9-2 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4zm2 2v12h14V6H3zm2-6h2v2H5V0zm8 0h2v2h-2V0zM5 9h2v2H5V9zm0 4h2v2H5v-2zm4-4h2v2H9V9zm0 4h2v2H9v-2zm4-4h2v2h-2V9zm0 4h2v2h-2v-2z" />
+        </svg>
+    )
+}
+
+
+

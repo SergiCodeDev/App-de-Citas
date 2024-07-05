@@ -103,7 +103,7 @@ export default function FormLoginAndRegister({ type }) {
                                     placeholder="Usuario"
                                     className="w-[300px] max-sm:w-full bg-transparent outline-none"
                                 />
-                                <IconUser className="h-7" />
+                                <IconUser className="h-6" />
                             </div>
                             {errors.usuario && (
                                 <p className="text-red-500 px-5 pt-3 pb-0">{errors.usuario.message}</p>
