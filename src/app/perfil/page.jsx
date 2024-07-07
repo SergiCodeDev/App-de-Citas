@@ -152,7 +152,7 @@ export default function Perfil() {
                                 name="fotoDePerfil"
                                 id={fotoDePerfilForm}
                                 accept="image/jpeg, image/png"
-                                className="w-[328px] max-sm:w-full bg-transparent outline-none file:bg-pink-400 file:hover:bg-pink-500 file:pl-5 file:pr-[10px] file:mr-[10px] file:cursor-pointer cursor-pointer file:transition-color file:duration-200 file:ease-in-out file:text-white file:border-none file:rounded-s-2xl file:h-[52px]"
+                                className="w-[328px] max-sm:w-full bg-transparent outline-none file:bg-pink-400 file:hover:bg-pink-500 file:pl-5 file:pr-[10px] file:mr-[10px] file:cursor-pointer cursor-pointer file:transition-color file:duration-200 file:ease-in-out file:text-white file:border-none file:rounded-s-2xl file:h-12"
                             />
                             <img
                             src={previewImageUrl}
