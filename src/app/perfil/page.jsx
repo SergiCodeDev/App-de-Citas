@@ -36,6 +36,25 @@ export default function Perfil() {
         formState: { errors },
     } = useForm();
 
+    const updateUser = async (data) => {
+        console.log(data)
+        setCargando(true);
+        try {
+            const res = await fetch(`/api/users/${user._id}/updates`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+
+            setCargando(false);
+            /* window.location.reload(); */
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     const fotoDePerfilForm = useId();
     const usuarioForm = useId();
     const edadForm = useId();
@@ -85,18 +104,11 @@ export default function Perfil() {
         }
     };
 
-
-    const router = useRouter()
-
-    const onSubmitLogic = async (data) => {
-
-    }
-
     return cargando ? <Cargando /> : (
         <main className="w-full h-lvh flex items-center justify-center">
             <div className="w-1/3 py-7 px-4 max-sm:w-5/6 max-lg:w-2/3 max-xl:w-1/2 flex flex-col items-center justify-center gap-6 bg-white rounded-3xl shadow-2xl shadow-pink-400/60">
                 <img src="/next.svg" alt="logo" className="w-52 h-auto mt-7" />
-                <form noValidate className="flex flex-col items-center gap-5" onSubmit={handleSubmit(onSubmitLogic)}>
+                <form noValidate className="flex flex-col items-center gap-5" onSubmit={handleSubmit(updateUser)}>
 
                     <div className="max-sm:w-72 w-96">
                         <img
@@ -117,7 +129,7 @@ export default function Perfil() {
                                                 return 'Sólo se permiten archivos JPEG y PNG.';
                                             }
                                             if (file[0].size > 2 * 1024 * 1024) { // 2MB
-                                                return 'El tamaño del archivo no debe exceder los 2 MB.';
+                                                return 'El tamaño del archivo supera los 2 MB.';
                                             }
                                             /* 
                                             // Validar dimensiones de la imagen
@@ -144,7 +156,7 @@ export default function Perfil() {
                                             }
                                             */
                                         }
-                                        
+
                                         return true;
                                     }
                                 })}
@@ -155,10 +167,10 @@ export default function Perfil() {
                                 className="w-[328px] max-sm:w-full bg-transparent outline-none file:bg-pink-400 file:hover:bg-pink-500 file:pl-5 file:pr-[10px] file:mr-[10px] file:cursor-pointer cursor-pointer file:transition-color file:duration-200 file:ease-in-out file:text-white file:border-none file:rounded-s-2xl file:h-12"
                             />
                             <img
-                            src={previewImageUrl}
-                            alt="Foto de perfil"
-                            className="w-6 h-6 rounded-full object-cover object-center mr-5"
-                        />
+                                src={previewImageUrl}
+                                alt="Foto de perfil"
+                                className="w-6 h-6 rounded-full object-cover object-center mr-5"
+                            />
                         </div>
                         {errors.fotoDePerfil && (
                             <p className="text-red-500 px-5 pt-3 pb-0">{errors.fotoDePerfil.message}</p>
