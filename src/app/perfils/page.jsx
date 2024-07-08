@@ -18,7 +18,7 @@ export default function Perfil() {
         if (user) {
             reset({
                 usuario: user?.username,
-                fotoDePerfil: user?.profileImage,
+                fotoDePerfil: null,
                 edad: user?.age,
                 ciudad: user?.location,
                 descripcion: user?.bio
@@ -37,21 +37,35 @@ export default function Perfil() {
     } = useForm();
 
     const updateUser = async (data) => {
-        console.log(data.fotoDePerfil)
-        /* setCargando(true); */
+        const formData = new FormData();
+
+        // Agregar cada campo al formData
+        formData.append("usuario", data.usuario);
+        // Verificar si se proporcionó alguna imagen antes de agregarla al formData
+        if (data.fotoDePerfil && data.fotoDePerfil.length > 0) {
+            formData.append("fotoDePerfil", data.fotoDePerfil[0]);
+        }
+        formData.append("edad", data.edad);
+        formData.append("ciudad", data.ciudad);
+        formData.append("descripcion", data.descripcion);
+
+        console.log(formData)
         try {
             const res = await fetch(`/api/users/${user._id}/update`, {
                 method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
+                body: formData,
             });
 
-            /* setCargando(false); */
-            /* window.location.reload(); */
+            if (res.ok) {
+                toast.success("Perfil actualizado correctamente");
+                // Si quieres recargar la página, puedes descomentar esta línea:
+                // window.location.reload();
+            } else {
+                toast.error("Hubo un problema al actualizar el perfil");
+            }
         } catch (error) {
-            console.log(error);
+            console.error("Error al actualizar el perfil:", error);
+            toast.error("Hubo un error al intentar actualizar el perfil");
         }
     };
 
