@@ -1,12 +1,10 @@
 "use client"
 
-import Link from "next/link";
-import { IconCalendar, IconCity, IconDescription, IconLock, IconMail, IconUser } from "@/components/icon/IconsGroup";
+import { IconCalendar, IconCity, IconDescription, IconUser } from "@/components/icon/IconsGroup";
 import { useEffect, useId, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
-import { signIn, useSession } from "next-auth/react"
+import { useSession } from "next-auth/react"
 import Cargando from "@/components/loader/cargando";
 
 export default function Perfil() {
@@ -37,6 +35,7 @@ export default function Perfil() {
     } = useForm();
 
     const updateUser = async (data) => {
+        setCargando(true);
         const formData = new FormData();
 
         // Agregar cada campo al formData
@@ -49,7 +48,7 @@ export default function Perfil() {
         formData.append("ciudad", data.ciudad);
         formData.append("descripcion", data.descripcion);
 
-        console.log(formData)
+
         try {
             const res = await fetch(`/api/users/${user._id}/update`, {
                 method: "PUT",
@@ -57,12 +56,12 @@ export default function Perfil() {
             });
 
             if (res.ok) {
-                toast.success("Perfil actualizado correctamente");
-                // Si quieres recargar la página, puedes descomentar esta línea:
-                // window.location.reload();
+                setCargando(false);
+                window.location.reload();
             } else {
                 toast.error("Hubo un problema al actualizar el perfil");
             }
+
         } catch (error) {
             console.error("Error al actualizar el perfil:", error);
             toast.error("Hubo un error al intentar actualizar el perfil");

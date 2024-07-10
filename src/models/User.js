@@ -34,6 +34,10 @@ const UserSchema = new mongoose.Schema({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     default: [],
   },
+  dislikes: {
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    default: [],
+  },
   matches: {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     default: [],

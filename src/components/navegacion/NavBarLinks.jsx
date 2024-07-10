@@ -9,9 +9,11 @@ export function NavBarLinks() {
     // Definición de los enlaces
     const links = [
         { nombre: 'Inicio', url: '/' },
+        { nombre: 'Explorar', url: '/explorar'},
         { nombre: 'Chat', url: '/chat' },
-        { nombre: 'Contacto', url: '/contacto' },
         { nombre: 'Perfil', url: '/perfil' },
+        { nombre: 'Registro', url: '/register' },
+        { nombre: 'Iniciar sesión', url: '/login' },
     ];
 
     return (
