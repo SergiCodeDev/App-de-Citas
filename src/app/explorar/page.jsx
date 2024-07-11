@@ -47,7 +47,7 @@ export default function Explorar() {
             )
                 : user
                     ? (<div className='flex items-center flex-col gap-6'>
-                        <div className='w-1/3 max-sm:w-5/6 max-lg:w-2/3 max-xl:w-1/2 flex flex-col items-center justify-center gap-6 bg-white rounded-3xl shadow-2xl shadow-pink-400/60'>
+                        <div className='max-sm:w-5/6 max-md:w-6/12 max-lg:w-5/12 max-xl:w-4/12 max-2xl:w-3/12 w-1/5 flex flex-col items-center justify-center bg-white rounded-3xl shadow-2xl shadow-pink-400/60'>
 
                             <div className='relative w-full'>
                                 <img
@@ -56,13 +56,20 @@ export default function Explorar() {
                                     alt={user?.username}
                                 />
                                 <div className='absolute bottom-2 left-2'>
-                                <h1 className='bottom-3.5'>{user?.username}</h1>
-                                <p className=''>{user?.age}</p>
+                                    <div className='px-3 py-1 text-white backdrop-blur-md rounded-2xl shadow-[0_0_12px] shadow-white/40 transition-all ease-in-out duration-300 hover:backdrop-blur-lg flex flex-wrap items-end gap-1'>
+                                        <h1 className=' text-xl font-semibold truncate hover:overflow-visible hover:whitespace-normal max-w-[16ch]'>{user?.username}</h1>
+                                        <p className='text-lg translate-y-[1px] font-semibold'>{user?.age}</p>
+                                    </div>
                                 </div>
-                                <div className='absolute top-2 right-0'>
-                                <p className='px-2 truncate hover:overflow-visible hover:whitespace-normal max-w-[20ch]'>{user?.location}</p>
-                                </div>
-                               
+                                {user?.location && <div className='absolute top-2 right-2'>
+                                    <p
+                                        className='px-3 py-1 text-white font-medium backdrop-blur-md rounded-2xl shadow-[0_0_12px] shadow-white/40 truncate hover:overflow-visible hover:whitespace-normal max-w-[20ch] transition-all ease-in-out duration-300 hover:backdrop-blur-lg'
+                                    >
+                                        {user?.location}
+                                    </p>
+                                </div>}
+                                {/* poner bg-black/40 y hacer verificacion si exite el campo */}
+
                             </div>
                             <div className='py-7 px-4 w-full'>
                                 <p>{user?.bio}</p>
