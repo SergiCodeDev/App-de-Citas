@@ -41,27 +41,39 @@ export default function Explorar() {
     }, [userId]);
 
     return (
-        <main className='"w-full h-lvh flex items-center justify-center'>
+        <main className='"w-full min-h-lvh flex items-center justify-center'>
             {errorData ? (
                 <p>¡Ups! Algo salió mal.</p>
             )
                 : user
-                    ? (
-                        <div className='w-1/3 py-7 px-4 max-sm:w-5/6 max-lg:w-2/3 max-xl:w-1/2 flex flex-col items-center justify-center gap-6 bg-white rounded-3xl shadow-2xl shadow-pink-400/60'>
-                            <img 
-                            className='w-32 h-32 rounded-full object-cover object-center' 
-                            src={user?.profileImage || "/assets/default-user.jpg"} 
-                            alt={user?.username} 
-                            />
-                            <h1>{user?.username}</h1>
-                            <p>{user?.age}</p>
-                            <p>{user?.location}</p>
-                            <p>{user?.bio}</p>
-                            <div className='flex gap-10'>
-                                <button className='bg-green-300 w-16 h-16 rounded-full'>Like</button>
-                                <button className='bg-red-300 w-16 h-16 rounded-full'>DisLike</button>
+                    ? (<div className='flex items-center flex-col gap-6'>
+                        <div className='w-1/3 max-sm:w-5/6 max-lg:w-2/3 max-xl:w-1/2 flex flex-col items-center justify-center gap-6 bg-white rounded-3xl shadow-2xl shadow-pink-400/60'>
+
+                            <div className='relative w-full'>
+                                <img
+                                    className='w-full h-full rounded-t-3xl rounde object-cover object-center'
+                                    src={user?.profileImage || "/assets/default-user.jpg"}
+                                    alt={user?.username}
+                                />
+                                <div className='absolute bottom-2 left-2'>
+                                <h1 className='bottom-3.5'>{user?.username}</h1>
+                                <p className=''>{user?.age}</p>
+                                </div>
+                                <div className='absolute top-2 right-0'>
+                                <p className='px-2 truncate hover:overflow-visible hover:whitespace-normal max-w-[20ch]'>{user?.location}</p>
+                                </div>
+                               
                             </div>
+                            <div className='py-7 px-4 w-full'>
+                                <p>{user?.bio}</p>
+                            </div>
+
                         </div>
+                        <div className='flex gap-10'>
+                            <button className='bg-green-300 w-16 h-16 rounded-full'>Like</button>
+                            <button className='bg-red-300 w-16 h-16 rounded-full'>DisLike</button>
+                        </div>
+                    </div>
                     )
                     : (
                         <p>No hay más usuarios para mostrar</p>
