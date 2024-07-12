@@ -1,6 +1,8 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import { useSession } from "next-auth/react";
+import LeerMasBio from '@/components/text/LeerMasBio';
+import { IconDislike, IconLike } from '@/components/icon/IconsGroup';
 
 export default function Explorar() {
     const { data: session } = useSession()
@@ -43,7 +45,7 @@ export default function Explorar() {
     return (
         <main className='"w-full min-h-lvh flex items-center justify-center'>
             {errorData ? (
-                <p>¡Ups! Algo salió mal.</p>
+                <p className='font-semibold text-xl text-black/30'>¡Ups! Algo salió mal.</p>
             )
                 : user
                     ? (<div className='flex items-center flex-col gap-6'>
@@ -51,39 +53,38 @@ export default function Explorar() {
 
                             <div className='relative w-full'>
                                 <img
-                                    className='w-full h-full rounded-t-3xl rounde object-cover object-center'
+                                    className='w-full h-full aspect-square rounded-t-3xl rounde object-cover object-center'
                                     src={user?.profileImage || "/assets/default-user.jpg"}
                                     alt={user?.username}
                                 />
                                 <div className='absolute bottom-2 left-2'>
-                                    <div className='px-3 py-1 text-white backdrop-blur-md rounded-2xl shadow-[0_0_12px] shadow-white/40 transition-all ease-in-out duration-300 hover:backdrop-blur-lg flex flex-wrap items-end gap-1'>
+                                    <div className='px-3 py-1 text-white bg-black/10 backdrop-blur-md rounded-2xl shadow-[0_0_12px] shadow-white/35 transition-all ease-in-out duration-300 hover:backdrop-blur-lg flex flex-wrap items-end gap-1'>
                                         <h1 className=' text-xl font-semibold truncate hover:overflow-visible hover:whitespace-normal max-w-[16ch]'>{user?.username}</h1>
-                                        <p className='text-lg translate-y-[1px] font-semibold'>{user?.age}</p>
+                                        {user?.age && <p className='text-lg translate-y-[1px] font-semibold'>{user?.age}</p>}
                                     </div>
                                 </div>
                                 {user?.location && <div className='absolute top-2 right-2'>
                                     <p
-                                        className='px-3 py-1 text-white font-medium backdrop-blur-md rounded-2xl shadow-[0_0_12px] shadow-white/40 truncate hover:overflow-visible hover:whitespace-normal max-w-[20ch] transition-all ease-in-out duration-300 hover:backdrop-blur-lg'
+                                        className='px-3 py-1 text-white font-medium bg-black/10 backdrop-blur-md rounded-2xl shadow-[0_0_12px] shadow-white/35 truncate hover:overflow-visible hover:whitespace-normal max-w-[20ch] transition-all ease-in-out duration-300 hover:backdrop-blur-lg'
                                     >
                                         {user?.location}
                                     </p>
                                 </div>}
-                                {/* poner bg-black/40 y hacer verificacion si exite el campo */}
-
                             </div>
-                            <div className='py-7 px-4 w-full'>
-                                <p>{user?.bio}</p>
-                            </div>
-
+                            {user?.bio && <LeerMasBio>{user?.bio}</LeerMasBio>}
                         </div>
                         <div className='flex gap-10'>
-                            <button className='bg-green-300 w-16 h-16 rounded-full'>Like</button>
-                            <button className='bg-red-300 w-16 h-16 rounded-full'>DisLike</button>
+                            <button className='bg-green-400 hover:bg-green-500 active:bg-green-600 transition-colors ease-in-out duration-200 w-16 h-16 rounded-full flex justify-center items-center'>
+                                <IconLike className="text-white h-[46px] translate-y-[2px]" />
+                            </button>
+                            <button className='bg-red-400 hover:bg-red-500 active:bg-red-600 transition-colors ease-in-out duration-200 w-16 h-16 rounded-full flex justify-center items-center'>
+                                <IconDislike className="text-white h-12" />
+                            </button>
                         </div>
                     </div>
                     )
                     : (
-                        <p>No hay más usuarios para mostrar</p>
+                        <p className='font-semibold text-xl text-black/30'>No hay más usuarios para mostrar</p>
                     )
             }
 
