@@ -10,17 +10,9 @@ export const PUT = async (req, { params }) => {
 
     const { userId } = params;
 
-    // Acceder directamente al FormData desde req
-    const formData = await req.formData();
+    const body = await req.json();
 
-    // Extraer los campos del formulario
-    const usuario = formData.get('usuario');
-    const edad = formData.get('edad');
-    const ciudad = formData.get('ciudad');
-    const descripcion = formData.get('descripcion');
-
-    const file2 = formData.get('fotoDePerfil');
-    console.log(usuario, edad, ciudad, descripcion, file2)
+    const { usuario, fotoDePerfil, edad, ciudad, descripcion } = body;
 
     let updateFields = {
       username: usuario,
@@ -36,8 +28,8 @@ export const PUT = async (req, { params }) => {
     let nuevaImagenGuardada = false;
     let imagePathAnterior = null;
 
-    if (formData.has('fotoDePerfil')) {
-      const file = formData.get('fotoDePerfil');
+    if (fotoDePerfil && fotoDePerfil.length > 0) {
+      const file = fotoDePerfil[0];
 
       // Validar el tipo y tamaño del archivo
       const validTypes = ['image/jpeg', 'image/png'];
@@ -51,18 +43,12 @@ export const PUT = async (req, { params }) => {
       // Leer el contenido del archivo y guardar en la carpeta public
       const extension = file.type === 'image/jpeg' ? 'jpg' : 'png';
       const imageName = `${uuidv4()}-${Date.now()}.${extension}`;
-      const imagePath = path.join(process.cwd(), 'public', 'pictures', imageName);
-      const imageBuffer = await file.arrayBuffer(); // Convertir a ArrayBuffer
-
-      // Crea el directorio si no existe
-      const picturesDir = path.join(process.cwd(), 'public', 'pictures');
-      if (!fs.existsSync(picturesDir)) {
-        fs.mkdirSync(picturesDir, { recursive: true });
-      }
+      const imagePath = path.join(process.cwd(), 'public','pictures', imageName);
+      const imageBuffer = await file.arrayBuffer();
 
       try {
         fs.writeFileSync(imagePath, Buffer.from(imageBuffer));
-        updateFields.profileImage = `/pictures/${imageName}`; // Ruta relativa al archivo en la carpeta 'public'
+        updateFields.profileImage = `/${imageName}`; // Ruta relativa al archivo en la carpeta 'public'
         nuevaImagenGuardada = true;
       } catch (error) {
         console.error('Error al guardar la nueva imagen', error);
@@ -99,7 +85,7 @@ export const PUT = async (req, { params }) => {
 
     return new Response(JSON.stringify(updatedUser), { status: 200 });
   } catch (err) {
-    console.error(err);
+    console.log(err);
     return new Response("Error al actualizar el usuario", { status: 500 });
   }
 };

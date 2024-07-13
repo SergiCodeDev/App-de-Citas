@@ -17,13 +17,13 @@ export const GET = async (req, { params }) => {
       return new Response("Usuario no encontrado", { status: 404 });
     }
 
-    
+    /* 
     const user = await User.findOne({
       _id: { $ne: userId },
       _id: { $nin: [...currentUser.likes, ...currentUser.dislikes] }
     }).exec();
-    
-/* 
+    */
+
     const user = await User.findOne({
       _id: { $ne: userId },
       $nor: [
@@ -31,7 +31,6 @@ export const GET = async (req, { params }) => {
         { _id: { $in: currentUser.dislikes } }
       ]
     }).exec();
-     */
     /* 
     if (!user) {
       return new Response("Ningún usuario disponible", { status: 404 });
@@ -39,7 +38,7 @@ export const GET = async (req, { params }) => {
     */
 
     if (!user) {
-      return new Response("No hay más usuarios para mostrar", { status: 204 });
+      return new Response(null, { status: 204 }); // Para poder devolver 204 poner null
     }
 
     // Seleccionar las propiedades específicas del usuario que deseas devolver

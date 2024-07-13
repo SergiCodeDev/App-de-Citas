@@ -1,4 +1,3 @@
-import { pusherServer } from "@lib/pusher";
 import Chat from "@models/Chat";
 import User from "@models/User";
 import { connectToDB } from "@mongodb";
@@ -33,10 +32,7 @@ export const POST = async (req) => {
       }) 
       Promise.all(updateAllMembers);
       
-      /* Activa un evento Pusher para que cada miembro notifique un nuevo chat */
-      chat.members.map(async (member) => {
-        await pusherServer.trigger(member._id.toString(), "new-chat", chat)
-      })
+      /* Activa un evento para que cada miembro notifique un nuevo chat */
     }
 
 
