@@ -5,6 +5,7 @@ import { NavBarLinks } from "./NavBarLinks";
 import Link from "next/link";
 import { IconLogout } from "../icon/IconsGroup";
 import { signOut, useSession } from "next-auth/react";
+import { NavPerfil } from "./NavPerfil";
 
 export function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,7 +37,7 @@ export function NavBar() {
   return (
     <header className="bg-pink-400 shadow-2xl shadow-pink-400/70 text-white p-4 sticky top-0 z-30">
       <div className="container mx-auto flex justify-between items-center">
-        <Link href="/"><img src="/next.svg" alt="Logo" className="h-7" /></Link>
+        <Link href="/"><img src="/logo.png" alt="Logo" className="h-7" /></Link>
         <nav className="hidden md:flex">
           <ul className="flex space-x-4">
             <NavBarLinks />
@@ -53,6 +54,8 @@ export function NavBar() {
           className="w-7 h-7 scale-[1.4] rounded-full object-cover object-center"
           />
         </Link>
+
+        <NavPerfil urlImg={user?.profileImage || "/assets/default-user.jpg"} handleLogout={handleLogout} />
 
 
         <button className="md:hidden scale-150" onClick={handleOpenModal}>

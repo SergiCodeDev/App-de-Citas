@@ -118,16 +118,15 @@ export default function Perfil() {
     };
 
     return cargando ? <Cargando /> : (
-        <main className="w-full h-lvh flex items-center justify-center">
-            <div className="w-1/3 py-7 px-4 max-sm:w-5/6 max-lg:w-2/3 max-xl:w-1/2 flex flex-col items-center justify-center gap-6 bg-white rounded-3xl shadow-2xl shadow-pink-400/60">
-                <img src="/next.svg" alt="logo" className="w-52 h-auto mt-7" />
+        <main className="w-full min-h-[calc(100lvh-60px)] flex items-center justify-center bg-gradient-to-r from-pink-50 via-purple-50 to-pink-50">
+            <div className="w-1/3 py-7 px-4 max-sm:w-5/6 max-lg:w-2/3 max-xl:w-1/2 flex flex-col items-center justify-center gap-6 bg-white rounded-3xl shadow-2xl shadow-pink-400/60  max-sm:my-4 my-12">
                 <form noValidate className="flex flex-col items-center gap-5" onSubmit={handleSubmit(updateUser)}>
 
                     <div className="max-sm:w-72 w-96">
                         <img
                             src={previewImageUrl}
                             alt="Foto de perfil"
-                            className="w-32 h-32 rounded-full object-cover object-center m-auto mb-2"
+                            className="w-32 h-32 rounded-full object-cover object-center m-auto mb-6"
                         />
                         <div onClick={() => handleFocusImput(fotoDePerfilForm)} className="flex items-center justify-between rounded-2xl shadow-2xl transition-all duration-200 ease-in-out hover:scale-110 hover:bg-white focus-within:scale-110 focus-within:bg-white shadow-pink-400/60">
 

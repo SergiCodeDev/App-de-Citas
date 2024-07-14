@@ -77,9 +77,8 @@ export default function FormLoginAndRegister({ type }) {
     }
 
     return (
-        <main className="w-full h-lvh flex items-center justify-center">
-            <div className="w-1/3 py-7 px-4 max-sm:w-5/6 max-lg:w-2/3 max-xl:w-1/2 flex flex-col items-center justify-center gap-6 bg-white rounded-3xl shadow-2xl shadow-pink-400/60">
-                <img src="/next.svg" alt="logo" className="w-52 h-auto" />
+            <div className="w-full py-7 px-4 flex flex-col items-center justify-center gap-6 bg-white rounded-3xl shadow-2xl shadow-pink-400/60">
+                <img src="/logo.png" alt="logo" className="w-52 h-auto" />
                 <form noValidate className="flex flex-col items-center gap-5" onSubmit={handleSubmit(onSubmitLogic)}>
                     {type === "register" && (
                         <div className="max-sm:w-72 w-96">
@@ -245,6 +244,5 @@ export default function FormLoginAndRegister({ type }) {
                     {/* <pre style={{ width: "400px" }}>{JSON.stringify(watch(), null, 2)}</pre> */}
                 </form>
             </div>
-        </main>
     )
 }
