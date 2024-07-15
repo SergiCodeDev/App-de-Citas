@@ -46,7 +46,6 @@ export default function Perfil() {
         }
         // Verificar si se proporcionó un numero sino no devolvera nada y sera null
         if (data.edad) formData.append("edad", data.edad);
-        // formData.append("edad", data.edad);
         formData.append("ciudad", data.ciudad);
         formData.append("descripcion", data.descripcion);
 
