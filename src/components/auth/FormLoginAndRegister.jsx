@@ -61,7 +61,7 @@ export default function FormLoginAndRegister({ type }) {
             })
 
             if (res.ok) {
-                router.push("/");
+                router.push("/explorar");
             }
 
             if (res.error) {

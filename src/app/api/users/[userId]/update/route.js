@@ -15,12 +15,18 @@ export const PUT = async (req, { params }) => {
 
     // Extraer los campos del formulario
     const usuario = formData.get('usuario');
-    const edad = formData.get('edad');
+    let edad;
+    if (formData.get('edad')=="null"){
+      edad=null;
+    }else{
+      edad = formData.get('edad');
+    }
+    
     const ciudad = formData.get('ciudad');
     const descripcion = formData.get('descripcion');
 
     const file2 = formData.get('fotoDePerfil');
-    console.log(usuario, edad, ciudad, descripcion, file2)
+    console.error(usuario, edad, ciudad, descripcion, file2)
 
     let updateFields = {
       username: usuario,
