@@ -44,7 +44,9 @@ export default function Perfil() {
         if (data.fotoDePerfil && data.fotoDePerfil.length > 0) {
             formData.append("fotoDePerfil", data.fotoDePerfil[0]);
         }
-        formData.append("edad", data.edad);
+        // Verificar si se proporcionó un numero sino no devolvera nada y sera null
+        if (data.edad) formData.append("edad", Number(data.edad));
+        // formData.append("edad", data.edad);
         formData.append("ciudad", data.ciudad);
         formData.append("descripcion", data.descripcion);
 
