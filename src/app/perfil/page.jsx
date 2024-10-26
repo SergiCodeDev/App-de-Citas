@@ -1,11 +1,11 @@
 "use client"
 
 import { IconCalendar, IconCity, IconDescription, IconUser } from "@/components/icon/IconsGroup";
+import Cargando from "@/components/loader/cargando";
+import { useSession } from "next-auth/react";
 import { useEffect, useId, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useSession } from "next-auth/react"
-import Cargando from "@/components/loader/cargando";
 
 export default function Perfil() {
     const { data: session } = useSession()
